@@ -1,8 +1,10 @@
+[Задание 1: Скриншот с багами](./Task1/Task1.md) 
+
+[Задание 2.1: Тесты API](https://github.com/avito-tech/tech-internship/blob/main/Tech%20Internships/QA/QA-trainee-assignment-spring-2026/QA-trainee-assignment-spring-2026.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-21-%D1%82%D0%B5%D1%81%D1%82%D1%8B-api) | [Тест-кейсы](./TESTCASES.md) | [Баг-репорты](./BUGS.md) | [Расхождения API](./API_DISCREPANCIES.md) | [Allure отчет](https://melamori-blimm-im.github.io/avito-qa-internship-API-2026/)  
+
 # API-тесты для qa-internship.avito.com
 
 Автоматизированные тесты для API объявлений, написанные на Go.
-
-| [Задание 1](./Task1/Task1.md) | [Тест-кейсы](./TESTCASES.md) | [Баг-репорты](./BUGS.md) | [Расхождения API](./API_DISCREPANCIES.md) | [Allure отчет](https://melamori-blimm-im.github.io/avito-qa-internship-API-2026/) |
 
 **Host:** `https://qa-internship.avito.com`
 
@@ -146,3 +148,5 @@ golangci-lint run
 ├── BUGS.md                   # найденные баги API
 └── API_DISCREPANCIES.md      # расхождения реального API с Postman-коллекцией
 ```
+
+[Задание 2.2: Тесты UI](https://github.com/avito-tech/tech-internship/blob/main/Tech%20Internships/QA/QA-trainee-assignment-spring-2026/QA-trainee-assignment-spring-2026.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-22-%D1%82%D0%B5%D1%81%D1%82%D1%8B-ui) Так как UI задание тоже интересно, то сделала это задание тоже. Но времени на него было сильно много... [Репозиторий на задание 2.2](https://github.com/Melamori-Blimm-Im/avito-qa-internship-UI-2026)
