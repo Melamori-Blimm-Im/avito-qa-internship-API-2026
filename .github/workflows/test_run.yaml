@@ -1,0 +1,72 @@
+name: API Tests (Go)
+
+
+on:
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: "Какой набор тестов запустить?"
+        required: true
+        default: all
+        type: choice
+        options:
+          - all
+          - createItem
+          - deleteItem
+          - getItem
+          - getSellerItems
+          - getStatistic
+          - nonFunctional
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      ALLURE_OUTPUT_PATH: ${{ github.workspace }}
+      API_URL: https://qa-internship.avito.com
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+          cache: true
+
+      - name: Download modules
+        run: go mod download
+
+      - name: Run tests
+        run: |
+          set -e
+          SUITE="${{ github.event.inputs.suite }}"
+          case "$SUITE" in
+            all)           PKG="./tests/..." ;;
+            createItem)    PKG="./tests/scenarios/createItem/..." ;;
+            deleteItem)    PKG="./tests/scenarios/deleteItem/..." ;;
+            getItem)       PKG="./tests/scenarios/getItem/..." ;;
+            getSellerItems) PKG="./tests/scenarios/getSellerItems/..." ;;
+            getStatistic)  PKG="./tests/scenarios/getStatistic/..." ;;
+            nonFunctional) PKG="./tests/scenarios/nonFunctional/..." ;;
+            *)             PKG="./tests/..." ;;
+          esac
+          go test -v -count=1 -timeout 120s "$PKG"
+        continue-on-error: true
+
+      - uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+          keep_reports: 20
+
+      - uses: peaceiris/actions-gh-pages@v4
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
